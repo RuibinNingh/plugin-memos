@@ -1,0 +1,29 @@
+- generic [ref=e2]:
+  - img "Custom Logo" [ref=e4]
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: 用户名或邮箱地址
+      - textbox "用户名或邮箱地址" [active] [ref=e10]
+    - generic [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]: 密码
+        - link "忘记密码？" [ref=e14] [cursor=pointer]:
+          - /url: /password-reset/email
+      - generic [ref=e15]:
+        - textbox "密码" [ref=e16]
+        - img [ref=e18] [cursor=pointer]
+    - generic [ref=e20]:
+      - checkbox "保持登录会话" [ref=e21]
+      - generic [ref=e22]: 保持登录会话
+    - button "登录" [ref=e24] [cursor=pointer]
+  - link "返回网站" [ref=e26] [cursor=pointer]:
+    - /url: /
+    - img [ref=e27]
+    - generic [ref=e29]: 返回网站
+  - generic [ref=e30]:
+    - img [ref=e32]
+    - combobox [ref=e34]:
+      - option "English"
+      - option "Español"
+      - option "简体中文" [selected]
+      - option "繁体中文"

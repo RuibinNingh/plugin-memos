@@ -1,0 +1,209 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - button "MOONY 个人博客 Blog" [ref=e4] [cursor=pointer]:
+      - generic [ref=e5]: MOONY
+      - generic [ref=e6]:
+        - text: 个人博客
+        - text: Blog
+    - navigation [ref=e8]:
+      - list [ref=e9]:
+        - listitem [ref=e10]:
+          - link "首页" [ref=e11] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e12]: 首页
+        - listitem [ref=e13]:
+          - link "文章" [ref=e14] [cursor=pointer]:
+            - /url: /archives
+            - generic [ref=e15]: 文章
+        - listitem [ref=e16]:
+          - link "默认分类" [ref=e17] [cursor=pointer]:
+            - /url: /categories/default
+            - generic [ref=e18]: 默认分类
+        - listitem [ref=e19]:
+          - link "关于" [ref=e20] [cursor=pointer]:
+            - /url: /about
+            - generic [ref=e21]: 关于
+    - generic [ref=e22]:
+      - generic [ref=e23]:
+        - button "" [ref=e24] [cursor=pointer]
+        - text:  
+      - generic [ref=e25]:
+        - text: 
+        - button "Toggle theme" [ref=e27] [cursor=pointer]
+        - button "全站动态面板" [ref=e28] [cursor=pointer]
+  - main [ref=e29]:
+    - generic [ref=e30]:
+      - heading "瞬间 9篇" [level=1] [ref=e32]:
+        - text: 瞬间
+        - emphasis [ref=e33]: 9篇
+      - navigation [ref=e34]:
+        - list [ref=e35]:
+          - listitem [ref=e36]:
+            - link "全部" [ref=e37] [cursor=pointer]:
+              - /url: /moments
+    - article [ref=e38]:
+      - navigation [ref=e39]:
+        - button " 全部" [ref=e42] [cursor=pointer]:
+          - generic [ref=e44]: 
+          - generic [ref=e45]: 全部
+      - generic [ref=e46]:
+        - article [ref=e47]:
+          - article [ref=e48]:
+            - generic [ref=e49]:
+              - button [ref=e50] [cursor=pointer]
+              - generic [ref=e51]:
+                - button "Administrator" [ref=e53] [cursor=pointer]
+                - time [ref=e55]: 2026-05-16
+              - navigation [ref=e56]:
+                - link "" [ref=e57] [cursor=pointer]:
+                  - /url: /moments/memos-ZMhuyYLzzxzLHiL39ey7TK
+            - img [ref=e60]
+          - generic [ref=e61]:
+            - region "Notifications alt+T"
+            - complementary [ref=e62]:
+              - button " 暂无评论，快来抢沙发吧！" [ref=e63] [cursor=pointer]
+        - article [ref=e64]:
+          - article [ref=e65]:
+            - generic [ref=e66]:
+              - button [ref=e67] [cursor=pointer]
+              - generic [ref=e68]:
+                - button "Administrator" [ref=e70] [cursor=pointer]
+                - time [ref=e72]: 2026-05-04
+              - navigation [ref=e73]:
+                - link "" [ref=e74] [cursor=pointer]:
+                  - /url: /moments/memos-RGcSveWucaUHQjbAmsaCTN
+            - generic [ref=e75]:
+              - paragraph [ref=e76]: 关于我的一天
+              - img [ref=e78]
+          - generic [ref=e79]:
+            - region "Notifications alt+T"
+            - complementary [ref=e80]
+        - article [ref=e81]:
+          - article [ref=e82]:
+            - generic [ref=e83]:
+              - button [ref=e84] [cursor=pointer]
+              - generic [ref=e85]:
+                - button "Administrator" [ref=e87] [cursor=pointer]
+                - time [ref=e89]: 2026-04-26
+              - navigation [ref=e90]:
+                - link "" [ref=e91] [cursor=pointer]:
+                  - /url: /moments/memos-EbvFJ6yeAVkr32HbtVxfUg
+            - paragraph [ref=e93]: 也许多少年后在某个地方， 我将轻声叹息将往事回顾： 一片树林里分出两条路—— 而我选择了人迹更少的一条， 从此决定了我一生的道路。 --弗罗斯特《未选择的路》
+          - generic [ref=e94]:
+            - region "Notifications alt+T"
+            - complementary [ref=e95]
+        - article [ref=e96]:
+          - article [ref=e97]:
+            - generic [ref=e98]:
+              - button [ref=e99] [cursor=pointer]
+              - generic [ref=e100]:
+                - button "Administrator" [ref=e102] [cursor=pointer]
+                - time [ref=e104]: 2026-04-22
+              - navigation [ref=e105]:
+                - link "" [ref=e106] [cursor=pointer]:
+                  - /url: /moments/memos-jTqMSVM2njoNVqPJAhSwNY
+            - img [ref=e109]
+          - generic [ref=e110]:
+            - region "Notifications alt+T"
+            - complementary [ref=e111]
+        - article [ref=e112]:
+          - article [ref=e113]:
+            - generic [ref=e114]:
+              - button [ref=e115] [cursor=pointer]
+              - generic [ref=e116]:
+                - button "Administrator" [ref=e118] [cursor=pointer]
+                - time [ref=e120]: 2026-04-19
+              - navigation [ref=e121]:
+                - link "" [ref=e122] [cursor=pointer]:
+                  - /url: /moments/memos-SYqQ2HxMDgQueXQoooemmy
+            - generic [ref=e123]:
+              - paragraph [ref=e124]: 听说摔一下直接报废🥴 希望不要这么倒霉
+              - img [ref=e126]
+          - generic [ref=e127]:
+            - region "Notifications alt+T"
+            - complementary [ref=e128]
+        - article [ref=e129]:
+          - article [ref=e130]:
+            - generic [ref=e131]:
+              - button [ref=e132] [cursor=pointer]
+              - generic [ref=e133]:
+                - button "Administrator" [ref=e135] [cursor=pointer]
+                - time [ref=e137]: 2026-04-18
+              - navigation [ref=e138]:
+                - link "" [ref=e139] [cursor=pointer]:
+                  - /url: /moments/memos-2ZY6uXUF9aY35YBRrQtcco
+            - generic [ref=e140]:
+              - paragraph [ref=e141]: 英语终于不义和团了!!!
+              - img [ref=e143]
+          - generic [ref=e144]:
+            - region "Notifications alt+T"
+            - complementary [ref=e145]
+        - article [ref=e146]:
+          - article [ref=e147]:
+            - generic [ref=e148]:
+              - button [ref=e149] [cursor=pointer]
+              - generic [ref=e150]:
+                - button "Administrator" [ref=e152] [cursor=pointer]
+                - time [ref=e154]: 2026-04-18
+              - navigation [ref=e155]:
+                - link "" [ref=e156] [cursor=pointer]:
+                  - /url: /moments/memos-9mHDavhHGTMzcue7NEZzEj
+            - paragraph [ref=e158]: 我发现我可以在很多地方发动态 halo 瞬间，微信朋友圈，公众号，halo 博客一句话，memos 但是我不想重复发
+          - generic [ref=e159]:
+            - region "Notifications alt+T"
+            - complementary [ref=e160]
+        - article [ref=e161]:
+          - article [ref=e162]:
+            - generic [ref=e163]:
+              - button [ref=e164] [cursor=pointer]
+              - generic [ref=e165]:
+                - button "Administrator" [ref=e167] [cursor=pointer]
+                - time [ref=e169]: 2026-04-18
+              - navigation [ref=e170]:
+                - link "" [ref=e171] [cursor=pointer]:
+                  - /url: /moments/memos-YmEsxQDSX7TWDXnpgogtJa
+            - generic [ref=e172]:
+              - paragraph [ref=e173]: 准备换一个主力中性笔,之前一直用0.2mm的被老师制裁了QAQ
+              - img [ref=e175]
+          - generic [ref=e176]:
+            - region "Notifications alt+T"
+            - complementary [ref=e177]
+        - article [ref=e178]:
+          - article [ref=e179]:
+            - generic [ref=e180]:
+              - button [ref=e181] [cursor=pointer]
+              - generic [ref=e182]:
+                - button "Administrator" [ref=e184] [cursor=pointer]
+                - time [ref=e186]: 2026-04-17
+              - navigation [ref=e187]:
+                - link "" [ref=e188] [cursor=pointer]:
+                  - /url: /moments/memos-afQ2sHSFBBYuxB9a89FFeb
+            - paragraph [ref=e190]: 星度主题终于更新了
+          - generic [ref=e191]:
+            - region "Notifications alt+T"
+            - complementary [ref=e192]
+  - contentinfo [ref=e193]:
+    - generic [ref=e194]:
+      - generic [ref=e195]:
+        - generic [ref=e196]:
+          - heading "今天是我记得" [level=6] [ref=e197]
+          - heading "第948天星辰" [level=1] [ref=e198]
+        - generic [ref=e199]:
+          - heading "随机阅读「Hello Halo」" [level=6] [ref=e200]
+          - link "阅读 如果你看到了这一篇文章，那么证明你已经安装成功了，感谢使用 Halo 进行创作，希望能够使用愉快。" [ref=e201] [cursor=pointer]:
+            - /url: /archives/hello-halo
+      - generic [ref=e202]:
+        - heading "壹行随十人" [level=6] [ref=e203]
+        - list
+    - generic [ref=e204]:
+      - generic [ref=e205]:
+        - text: Halo版权所有 · 架构于
+        - link "Halo" [ref=e206] [cursor=pointer]:
+          - /url: https://www.halo.run
+        - text: 及为您增强体验的
+        - link "THYUU/星度" [ref=e207] [cursor=pointer]:
+          - /url: https://theme.thyuu.com
+        - text: 主题
+      - button "鄂ICP备xxxxxxx号 鄂ICP备xxxxxxx号" [ref=e209] [cursor=pointer]:
+        - img "鄂ICP备xxxxxxx号" [ref=e210]
+        - generic [ref=e211]: 鄂ICP备xxxxxxx号

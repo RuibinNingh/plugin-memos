@@ -1,0 +1,74 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - button "MOONY 个人博客 Blog" [ref=e4] [cursor=pointer]:
+      - generic [ref=e5]: MOONY
+      - generic [ref=e6]:
+        - text: 个人博客
+        - text: Blog
+    - navigation [ref=e8]:
+      - list [ref=e9]:
+        - listitem [ref=e10]:
+          - link "首页" [ref=e11] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e12]: 首页
+        - listitem [ref=e13]:
+          - link "文章" [ref=e14] [cursor=pointer]:
+            - /url: /archives
+            - generic [ref=e15]: 文章
+        - listitem [ref=e16]:
+          - link "默认分类" [ref=e17] [cursor=pointer]:
+            - /url: /categories/default
+            - generic [ref=e18]: 默认分类
+        - listitem [ref=e19]:
+          - link "关于" [ref=e20] [cursor=pointer]:
+            - /url: /about
+            - generic [ref=e21]: 关于
+    - generic [ref=e22]:
+      - generic [ref=e23]:
+        - button "" [ref=e24] [cursor=pointer]
+        - text:  
+      - generic [ref=e25]:
+        - text: 
+        - button "Toggle theme" [ref=e27] [cursor=pointer]
+        - button "全站动态面板" [ref=e28] [cursor=pointer]
+  - main [ref=e29]:
+    - article [ref=e30]:
+      - article [ref=e31]:
+        - generic [ref=e32]:
+          - button [ref=e33] [cursor=pointer]
+          - generic [ref=e34]:
+            - button "Administrator" [ref=e36] [cursor=pointer]
+            - time [ref=e38]: 2026-05-16
+          - navigation [ref=e39]:
+            - link "" [ref=e40] [cursor=pointer]:
+              - /url: /moments/memos-ZMhuyYLzzxzLHiL39ey7TK
+        - img [ref=e43]
+      - generic [ref=e44]:
+        - region "Notifications alt+T"
+        - complementary [ref=e45]:
+          - button " 暂无评论，快来抢沙发吧！" [ref=e46] [cursor=pointer]
+  - contentinfo [ref=e47]:
+    - generic [ref=e48]:
+      - generic [ref=e49]:
+        - generic [ref=e50]:
+          - heading "今天是我记得" [level=6] [ref=e51]
+          - heading "第948天星辰" [level=1] [ref=e52]
+        - generic [ref=e53]:
+          - heading "随机阅读「Hello Halo」" [level=6] [ref=e54]
+          - link "阅读 如果你看到了这一篇文章，那么证明你已经安装成功了，感谢使用 Halo 进行创作，希望能够使用愉快。" [ref=e55] [cursor=pointer]:
+            - /url: /archives/hello-halo
+      - generic [ref=e56]:
+        - heading "壹行随十人" [level=6] [ref=e57]
+        - list
+    - generic [ref=e58]:
+      - generic [ref=e59]:
+        - text: Halo版权所有 · 架构于
+        - link "Halo" [ref=e60] [cursor=pointer]:
+          - /url: https://www.halo.run
+        - text: 及为您增强体验的
+        - link "THYUU/星度" [ref=e61] [cursor=pointer]:
+          - /url: https://theme.thyuu.com
+        - text: 主题
+      - button "鄂ICP备xxxxxxx号 鄂ICP备xxxxxxx号" [ref=e63] [cursor=pointer]:
+        - img "鄂ICP备xxxxxxx号" [ref=e64]
+        - generic [ref=e65]: 鄂ICP备xxxxxxx号

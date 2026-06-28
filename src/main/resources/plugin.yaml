@@ -1,0 +1,24 @@
+# Refer https://docs.halo.run/developer-guide/plugin/basics/manifest
+
+apiVersion: plugin.halo.run/v1alpha1
+kind: Plugin
+metadata:
+  # The name defines how the plugin is invoked, A unique name
+  name: memos
+spec:
+  enabled: true
+  requires: ">=2.23.0"
+  author:
+    name: Halo
+    website: https://github.com/halo-dev
+  logo: logo.png
+  homepage: https://github.com/halo-dev/plugin-memos#readme
+  repo: https://github.com/halo-dev/plugin-memos
+  issues: https://github.com/halo-dev/plugin-memos/issues
+  displayName: "Memos 反向代理"
+  description: "在 Console 实时展示本地 memos 的公共动态，通过反向代理直连 memos 服务，不缓存。"
+  license:
+    - name: "GPL-3.0"
+      url: "https://github.com/halo-dev/plugin-memos/blob/main/LICENSE"
+  settingName: memos-settings
+  configMapName: memos-configMap

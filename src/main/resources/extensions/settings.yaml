@@ -1,0 +1,33 @@
+apiVersion: v1alpha1
+kind: Setting
+metadata:
+  name: memos-settings
+spec:
+  forms:
+    - group: base
+      label: Memos 配置
+      formSchema:
+        - $formkit: text
+          name: baseUrl
+          label: Memos 地址
+          value: "http://127.0.0.1:5230"
+          help: >
+            自建 memos 的根地址，例如 http://127.0.0.1:5230。
+            若 Halo 运行在 Docker 中，请填容器可达地址（如 http://172.17.0.1:5230）。
+        - $formkit: password
+          name: accessToken
+          label: Access Token
+          help: 可选。匿名访问已只返回公开 memos；若实例要求鉴权再填写。
+        - $formkit: text
+          name: owner
+          label: 归属 Halo 用户名
+          value: "admin"
+          help: 瞬间的 owner（单一作者），用于头像/昵称展示。
+        - $formkit: text
+          name: title
+          label: 瞬间页标题
+          value: "瞬间"
+        - $formkit: number
+          name: pageSize
+          label: 主题瞬间页每页条数
+          value: 10

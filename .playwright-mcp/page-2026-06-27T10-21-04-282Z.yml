@@ -1,0 +1,255 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - link "访问首页" [ref=e6] [cursor=pointer]:
+      - /url: /
+      - img [ref=e7]
+    - generic [ref=e17]:
+      - generic [ref=e19] [cursor=pointer]:
+        - img [ref=e21]
+        - generic [ref=e23]: 搜索
+        - generic [ref=e24]: Ctrl+K
+      - list [ref=e26]:
+        - listitem [ref=e27] [cursor=pointer]:
+          - generic [ref=e28]:
+            - img [ref=e30]
+            - generic [ref=e32]: 仪表盘
+        - listitem [ref=e33]: 内容
+        - listitem [ref=e34] [cursor=pointer]:
+          - generic [ref=e35]:
+            - img [ref=e37]
+            - generic [ref=e39]: 文章
+        - listitem [ref=e40] [cursor=pointer]:
+          - generic [ref=e41]:
+            - img [ref=e43]
+            - generic [ref=e45]: 页面
+        - listitem [ref=e46] [cursor=pointer]:
+          - generic [ref=e47]:
+            - img [ref=e49]
+            - generic [ref=e51]: 评论
+            - img [ref=e53]
+        - listitem [ref=e55] [cursor=pointer]:
+          - generic [ref=e56]:
+            - img [ref=e58]
+            - generic [ref=e60]: 附件
+        - listitem [ref=e61] [cursor=pointer]:
+          - generic [ref=e62]:
+            - img [ref=e64]
+            - generic [ref=e66]: 链接
+        - listitem [ref=e67] [cursor=pointer]:
+          - generic [ref=e68]:
+            - img [ref=e70]
+            - generic [ref=e74]: 订阅
+        - listitem [ref=e75]: 外观
+        - listitem [ref=e76] [cursor=pointer]:
+          - generic [ref=e77]:
+            - img [ref=e79]
+            - generic [ref=e81]: 主题
+        - listitem [ref=e82] [cursor=pointer]:
+          - generic [ref=e83]:
+            - img [ref=e85]
+            - generic [ref=e87]: 菜单
+        - listitem [ref=e88] [cursor=pointer]:
+          - generic [ref=e89]:
+            - img [ref=e91]
+            - generic [ref=e93]: 图标库
+        - listitem [ref=e94]: 系统
+        - listitem [ref=e95] [cursor=pointer]:
+          - generic [ref=e96]:
+            - img [ref=e98]
+            - generic [ref=e100]: 插件
+        - listitem [ref=e101] [cursor=pointer]:
+          - generic [ref=e102]:
+            - img [ref=e104]
+            - generic [ref=e106]: 用户
+        - listitem [ref=e107] [cursor=pointer]:
+          - generic [ref=e108]:
+            - img [ref=e110]
+            - generic [ref=e112]: 设置
+        - listitem [ref=e113] [cursor=pointer]:
+          - generic [ref=e114]:
+            - img [ref=e116]
+            - generic [ref=e118]: 概览
+        - listitem [ref=e119] [cursor=pointer]:
+          - generic [ref=e120]:
+            - img [ref=e122]
+            - generic [ref=e124]: 备份
+        - listitem [ref=e125] [cursor=pointer]:
+          - generic [ref=e126]:
+            - img [ref=e128]
+            - generic [ref=e130]: 工具
+        - listitem [ref=e131] [cursor=pointer]:
+          - generic [ref=e132]:
+            - img [ref=e134]
+            - generic [ref=e136]: 应用市场
+            - img [ref=e138]
+        - listitem [ref=e140] [cursor=pointer]:
+          - generic [ref=e141]:
+            - img [ref=e143]
+            - generic [ref=e153]: 鱼圈
+            - img [ref=e155]
+        - listitem [ref=e157]: 工具
+        - listitem [ref=e158] [cursor=pointer]:
+          - generic [ref=e159]:
+            - img [ref=e161]
+            - generic [ref=e163]: Memos
+    - generic [ref=e165]:
+      - generic [ref=e166]:
+        - generic "Administrator" [ref=e167]
+        - generic [ref=e169] [cursor=pointer]:
+          - img [ref=e171]
+          - generic [ref=e173]: 超级管理员
+      - generic [ref=e174]:
+        - button [ref=e175] [cursor=pointer]:
+          - img [ref=e176]
+        - button [ref=e178] [cursor=pointer]:
+          - img [ref=e179]
+  - main [ref=e181]:
+    - generic [ref=e182]:
+      - heading "仪表盘" [level=2] [ref=e183]:
+        - img [ref=e184]
+        - generic [ref=e186]: 仪表盘
+      - button "设置" [ref=e188] [cursor=pointer]:
+        - img [ref=e190]
+        - generic [ref=e192]: 设置
+    - generic [ref=e194]:
+      - generic [ref=e199]:
+        - img [ref=e201]
+        - generic [ref=e203]:
+          - generic [ref=e204]: 文章
+          - generic [ref=e209]:
+            - generic [ref=e210]: "0"
+            - generic [ref=e211]: "1"
+            - generic [ref=e212]: "2"
+            - generic [ref=e213]: "3"
+            - generic [ref=e214]: "4"
+            - generic [ref=e215]: "5"
+            - generic [ref=e216]: "6"
+            - generic [ref=e217]: "7"
+            - generic [ref=e218]: "8"
+            - generic [ref=e219]: "9"
+      - generic [ref=e224]:
+        - img [ref=e226]
+        - generic [ref=e228]:
+          - generic [ref=e229]: 评论
+          - generic [ref=e235]: "0"
+      - generic [ref=e240]:
+        - img [ref=e242]
+        - generic [ref=e244]:
+          - generic [ref=e245]: 用户
+          - generic [ref=e250]:
+            - generic [ref=e251]: "0"
+            - generic [ref=e252]: "1"
+            - generic [ref=e253]: "2"
+            - generic [ref=e254]: "3"
+            - generic [ref=e255]: "4"
+            - generic [ref=e256]: "5"
+            - generic [ref=e257]: "6"
+            - generic [ref=e258]: "7"
+            - generic [ref=e259]: "8"
+            - generic [ref=e260]: "9"
+      - generic [ref=e265]:
+        - img [ref=e267]
+        - generic [ref=e269]:
+          - generic [ref=e270]: 浏览量
+          - generic [ref=e276]: "0"
+      - generic [ref=e278]:
+        - generic [ref=e281]: 快捷访问
+        - generic [ref=e285]:
+          - generic [ref=e286] [cursor=pointer]:
+            - img [ref=e289]
+            - heading "个人中心" [level=3] [ref=e292]
+            - generic:
+              - img
+          - generic [ref=e293] [cursor=pointer]:
+            - img [ref=e296]
+            - heading "查看站点" [level=3] [ref=e299]
+            - generic:
+              - img
+          - generic [ref=e300] [cursor=pointer]:
+            - img [ref=e303]
+            - heading "创建文章" [level=3] [ref=e306]
+            - generic:
+              - img
+          - generic [ref=e307] [cursor=pointer]:
+            - img [ref=e310]
+            - heading "创建页面" [level=3] [ref=e313]
+            - generic:
+              - img
+          - generic [ref=e314] [cursor=pointer]:
+            - img [ref=e317]
+            - heading "附件上传" [level=3] [ref=e320]
+            - generic:
+              - img
+          - generic [ref=e321] [cursor=pointer]:
+            - img [ref=e324]
+            - heading "主题管理" [level=3] [ref=e327]
+            - generic:
+              - img
+          - generic [ref=e328] [cursor=pointer]:
+            - img [ref=e331]
+            - heading "插件管理" [level=3] [ref=e334]
+            - generic:
+              - img
+          - generic [ref=e335] [cursor=pointer]:
+            - img [ref=e338]
+            - heading "新建用户" [level=3] [ref=e341]
+            - generic:
+              - img
+          - generic [ref=e342] [cursor=pointer]:
+            - img [ref=e345]
+            - heading "刷新搜索引擎" [level=3] [ref=e348]
+            - generic:
+              - img
+      - generic [ref=e350]:
+        - generic [ref=e351]:
+          - generic [ref=e352]: 通知
+          - link "查看全部" [ref=e354] [cursor=pointer]:
+            - /url: /uc/notifications
+        - table [ref=e359]:
+          - rowgroup [ref=e360]:
+            - row "你的 Halo 账号被用于在 Linux 上登录 @admin 你好： 你的 Halo 账号被用于在 Linux 的 HeadlessChrome 149.0.0 上登录： 时间： 2026-06-27 18:21:03 GMT+8 IP 地址： 192.168.0.145 如果你知悉上述信息，请忽略此电子邮件。 如果你最近没有使用你的 Halo 账号登录并相信有人可能访问了你的账户，请尽快重设你的密码。 几秒前" [ref=e361]:
+              - cell "你的 Halo 账号被用于在 Linux 上登录 @admin 你好： 你的 Halo 账号被用于在 Linux 的 HeadlessChrome 149.0.0 上登录： 时间： 2026-06-27 18:21:03 GMT+8 IP 地址： 192.168.0.145 如果你知悉上述信息，请忽略此电子邮件。 如果你最近没有使用你的 Halo 账号登录并相信有人可能访问了你的账户，请尽快重设你的密码。" [ref=e362]:
+                - generic [ref=e364]:
+                  - generic [ref=e366]: 你的 Halo 账号被用于在 Linux 上登录
+                  - generic "@admin 你好： 你的 Halo 账号被用于在 Linux 的 HeadlessChrome 149.0.0 上登录： 时间： 2026-06-27 18:21:03 GMT+8 IP 地址： 192.168.0.145 如果你知悉上述信息，请忽略此电子邮件。 如果你最近没有使用你的 Halo 账号登录并相信有人可能访问了你的账户，请尽快重设你的密码。" [ref=e368]
+              - cell "几秒前" [ref=e369]:
+                - generic [ref=e373]: 几秒前
+            - row "你的 Halo 账号被用于在 Windows 10 上登录 @admin 你好： 你的 Halo 账号被用于在 Windows 10 的 Edge 149.0.0 上登录： 时间： 2026-06-27 11:29:57 GMT+8 IP 地址： 192.168.0.137 如果你知悉上述信息，请忽略此电子邮件。 如果你最近没有使用你的 Halo 账号登录并相信有人可能访问了你的账户，请尽快重设你的密码。 7 小时前" [ref=e374]:
+              - cell "你的 Halo 账号被用于在 Windows 10 上登录 @admin 你好： 你的 Halo 账号被用于在 Windows 10 的 Edge 149.0.0 上登录： 时间： 2026-06-27 11:29:57 GMT+8 IP 地址： 192.168.0.137 如果你知悉上述信息，请忽略此电子邮件。 如果你最近没有使用你的 Halo 账号登录并相信有人可能访问了你的账户，请尽快重设你的密码。" [ref=e375]:
+                - generic [ref=e377]:
+                  - generic [ref=e379]: 你的 Halo 账号被用于在 Windows 10 上登录
+                  - generic "@admin 你好： 你的 Halo 账号被用于在 Windows 10 的 Edge 149.0.0 上登录： 时间： 2026-06-27 11:29:57 GMT+8 IP 地址： 192.168.0.137 如果你知悉上述信息，请忽略此电子邮件。 如果你最近没有使用你的 Halo 账号登录并相信有人可能访问了你的账户，请尽快重设你的密码。" [ref=e381]
+              - cell "7 小时前" [ref=e382]:
+                - generic [ref=e386]: 7 小时前
+            - row "你的 Halo 账号被用于在 Linux 上登录 @admin 你好： 你的 Halo 账号被用于在 Linux 的 HeadlessChrome 149.0.0 上登录： 时间： 2026-06-27 11:23:45 GMT+8 IP 地址： 192.168.0.145 如果你知悉上述信息，请忽略此电子邮件。 如果你最近没有使用你的 Halo 账号登录并相信有人可能访问了你的账户，请尽快重设你的密码。 7 小时前" [ref=e387]:
+              - cell "你的 Halo 账号被用于在 Linux 上登录 @admin 你好： 你的 Halo 账号被用于在 Linux 的 HeadlessChrome 149.0.0 上登录： 时间： 2026-06-27 11:23:45 GMT+8 IP 地址： 192.168.0.145 如果你知悉上述信息，请忽略此电子邮件。 如果你最近没有使用你的 Halo 账号登录并相信有人可能访问了你的账户，请尽快重设你的密码。" [ref=e388]:
+                - generic [ref=e390]:
+                  - generic [ref=e392]: 你的 Halo 账号被用于在 Linux 上登录
+                  - generic "@admin 你好： 你的 Halo 账号被用于在 Linux 的 HeadlessChrome 149.0.0 上登录： 时间： 2026-06-27 11:23:45 GMT+8 IP 地址： 192.168.0.145 如果你知悉上述信息，请忽略此电子邮件。 如果你最近没有使用你的 Halo 账号登录并相信有人可能访问了你的账户，请尽快重设你的密码。" [ref=e394]
+              - cell "7 小时前" [ref=e395]:
+                - generic [ref=e399]: 7 小时前
+            - row "你的 Halo 账号被用于在 Linux 上登录 @admin 你好： 你的 Halo 账号被用于在 Linux 的 HeadlessChrome 149.0.0 上登录： 时间： 2026-06-27 11:17:22 GMT+8 IP 地址： 192.168.0.145 如果你知悉上述信息，请忽略此电子邮件。 如果你最近没有使用你的 Halo 账号登录并相信有人可能访问了你的账户，请尽快重设你的密码。 7 小时前" [ref=e400]:
+              - cell "你的 Halo 账号被用于在 Linux 上登录 @admin 你好： 你的 Halo 账号被用于在 Linux 的 HeadlessChrome 149.0.0 上登录： 时间： 2026-06-27 11:17:22 GMT+8 IP 地址： 192.168.0.145 如果你知悉上述信息，请忽略此电子邮件。 如果你最近没有使用你的 Halo 账号登录并相信有人可能访问了你的账户，请尽快重设你的密码。" [ref=e401]:
+                - generic [ref=e403]:
+                  - generic [ref=e405]: 你的 Halo 账号被用于在 Linux 上登录
+                  - generic "@admin 你好： 你的 Halo 账号被用于在 Linux 的 HeadlessChrome 149.0.0 上登录： 时间： 2026-06-27 11:17:22 GMT+8 IP 地址： 192.168.0.145 如果你知悉上述信息，请忽略此电子邮件。 如果你最近没有使用你的 Halo 账号登录并相信有人可能访问了你的账户，请尽快重设你的密码。" [ref=e407]
+              - cell "7 小时前" [ref=e408]:
+                - generic [ref=e412]: 7 小时前
+            - row "你的 Halo 账号被用于在 Linux 上登录 @admin 你好： 你的 Halo 账号被用于在 Linux 的 HeadlessChrome 149.0.0 上登录： 时间： 2026-06-27 11:13:04 GMT+8 IP 地址： 192.168.0.145 如果你知悉上述信息，请忽略此电子邮件。 如果你最近没有使用你的 Halo 账号登录并相信有人可能访问了你的账户，请尽快重设你的密码。 7 小时前" [ref=e413]:
+              - cell "你的 Halo 账号被用于在 Linux 上登录 @admin 你好： 你的 Halo 账号被用于在 Linux 的 HeadlessChrome 149.0.0 上登录： 时间： 2026-06-27 11:13:04 GMT+8 IP 地址： 192.168.0.145 如果你知悉上述信息，请忽略此电子邮件。 如果你最近没有使用你的 Halo 账号登录并相信有人可能访问了你的账户，请尽快重设你的密码。" [ref=e414]:
+                - generic [ref=e416]:
+                  - generic [ref=e418]: 你的 Halo 账号被用于在 Linux 上登录
+                  - generic "@admin 你好： 你的 Halo 账号被用于在 Linux 的 HeadlessChrome 149.0.0 上登录： 时间： 2026-06-27 11:13:04 GMT+8 IP 地址： 192.168.0.145 如果你知悉上述信息，请忽略此电子邮件。 如果你最近没有使用你的 Halo 账号登录并相信有人可能访问了你的账户，请尽快重设你的密码。" [ref=e420]
+              - cell "7 小时前" [ref=e421]:
+                - generic [ref=e425]: 7 小时前
+            - row "你的 Halo 账号被用于在 Windows 10 上登录 @admin 你好： 你的 Halo 账号被用于在 Windows 10 的 Edge 149.0.0 上登录： 时间： 2026-06-27 10:58:39 GMT+8 IP 地址： 192.168.0.137 如果你知悉上述信息，请忽略此电子邮件。 如果你最近没有使用你的 Halo 账号登录并相信有人可能访问了你的账户，请尽快重设你的密码。 7 小时前" [ref=e426]:
+              - cell "你的 Halo 账号被用于在 Windows 10 上登录 @admin 你好： 你的 Halo 账号被用于在 Windows 10 的 Edge 149.0.0 上登录： 时间： 2026-06-27 10:58:39 GMT+8 IP 地址： 192.168.0.137 如果你知悉上述信息，请忽略此电子邮件。 如果你最近没有使用你的 Halo 账号登录并相信有人可能访问了你的账户，请尽快重设你的密码。" [ref=e427]:
+                - generic [ref=e429]:
+                  - generic [ref=e431]: 你的 Halo 账号被用于在 Windows 10 上登录
+                  - generic "@admin 你好： 你的 Halo 账号被用于在 Windows 10 的 Edge 149.0.0 上登录： 时间： 2026-06-27 10:58:39 GMT+8 IP 地址： 192.168.0.137 如果你知悉上述信息，请忽略此电子邮件。 如果你最近没有使用你的 Halo 账号登录并相信有人可能访问了你的账户，请尽快重设你的密码。" [ref=e433]
+              - cell "7 小时前" [ref=e434]:
+                - generic [ref=e438]: 7 小时前
+    - generic [ref=e439]:
+      - text: Powered by
+      - link "Halo" [ref=e440] [cursor=pointer]:
+        - /url: /console/overview
