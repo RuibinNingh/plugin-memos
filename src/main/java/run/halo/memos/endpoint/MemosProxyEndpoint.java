@@ -25,10 +25,11 @@ import run.halo.app.plugin.ReactiveSettingFetcher;
  * through Halo without caching.
  *
  * <p>Mounted for Console/API use at
- * {@code /apis/api.memos.plugin.halo.run/v1alpha1/proxy/**}. Theme-side file
- * rendering uses the public {@code /memos/proxy/file/**} route. Only GET is
- * forwarded; the upstream {@code baseUrl} is trusted (configured by a
- * super-admin), so the SSRF surface is bounded to paths under that one host.</p>
+ * {@code /apis/api.memos.plugin.halo.run/v1alpha1/proxy/**}. Original file
+ * access uses the public {@code /memos/proxy/file/**} route; compressed image
+ * derivatives are handled by {@link MemosImageEndpoint}. Only GET is forwarded;
+ * the upstream {@code baseUrl} is trusted (configured by a super-admin), so the
+ * SSRF surface is bounded to paths under that one host.</p>
  */
 @Component
 @RequiredArgsConstructor

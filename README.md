@@ -2,7 +2,7 @@
 
 把自托管 [Memos](https://usememos.com/) 的公开动态实时接入 [Halo](https://www.halo.run/) 的 Halo 2.x 插件。
 
-`plugin-memos` 是为 **thyuu-xingdu / 星度主题** 的瞬间页面做的适配插件。它不同步、不缓存、不落库，会在访问时实时请求 Memos API，并把公开 memo 映射成星度主题 `moments.html` / `moment.html` 可消费的数据。
+`plugin-memos` 是为 **thyuu-xingdu / 星度主题** 的瞬间页面做的适配插件。它不同步、不落库，memo 数据会在访问时实时请求 Memos API；图片附件会按需生成本地压缩缓存，降低博客到浏览器的传输体积。
 
 没有星度主题也可以安装插件，但主题端 `/moments` 页面需要主题提供匹配模板；否则只能使用 Console 端 `/console/memos` 查看 Memos 动态。
 
@@ -13,7 +13,8 @@
 - Console 端 `/console/memos` 实时查看 Memos 公开动态
 - 支持时间线 / 瀑布流视图切换
 - 通过 Halo 后端代理 Memos API，避免浏览器直接访问内网 Memos 地址
-- 通过 `/memos/proxy/file/**` 代理附件，主题端图片可直接显示
+- 通过 `/memos/proxy/file/**` 保留原图访问，通过 `/memos/proxy/image/**` 提供本地压缩图缓存
+- 支持后台定时预热图片缓存，并可在 Console 手动刷新图片缓存
 - 可选 Access Token，匿名访问默认只展示 Memos 的 PUBLIC 内容
 - 接入 Halo 评论挂载点，moment 详情页可作为评论对象
 
@@ -63,6 +64,10 @@ build/libs/plugin-memos-<version>.jar
 | 归属 Halo 用户名 | `admin` | 用于主题端头像、昵称展示 |
 | 瞬间页标题 | `瞬间` | `/moments` 页面标题 |
 | 主题瞬间页每页条数 | `10` | 主题端分页大小 |
+| 启用图片压缩缓存 | `true` | 大图优先走本地压缩缓存 |
+| 压缩图最长边 | `1600` | 图片不会被放大 |
+| JPEG 质量 | `82` | PNG 无透明通道会转 JPEG，有透明通道保留 PNG |
+| 定时预热图片缓存 | `true` | 定时扫描最近 Memos 图片并提前生成缓存 |
 
 如果 Halo 运行在 Docker 中，`127.0.0.1` 通常指 Halo 容器自身，不是宿主机。此时 Memos 地址应填写容器可访问的地址，例如：
 
@@ -106,10 +111,19 @@ Console 端则通过：
 
 转发到配置的 Memos 服务。
 
+图片附件有两条公开路径：
+
+```text
+/memos/proxy/image/attachments/{uid}/{filename}  # 压缩缓存图
+/memos/proxy/file/attachments/{uid}/{filename}   # 原图
+```
+
+主题列表和 Console 缩略显示默认使用压缩图；点击图片或下载原图仍走原图路径。
+
 ## 注意事项
 
 - 插件不会把 Memos 数据写入 Halo 数据库。
-- 插件不会缓存 Memos 数据，每次访问都会实时请求 Memos。
+- 插件不会缓存 Memos 数据，每次访问都会实时请求 Memos；仅缓存图片压缩后的派生文件。
 - 主题端 `/moments` 不是独立前端页面，它依赖主题模板；没有兼容模板时不会自动生成完整页面。
 - Memos 的置顶内容可能会出现在较新的普通内容之前，这是上游排序语义。
 - 若要求严格按 `createTime` 倒序，需要在插件层另行显式排序。
@@ -168,7 +182,7 @@ perl -0777 -ne 'while(/data-moment-id="([^"]+)".*?<time class="moment-time">([^<
 
 ### 图片不显示
 
-检查 `/memos/proxy/file/**` 是否可访问，以及 Memos 附件是否需要鉴权。公开主题图片默认不带 Access Token。
+检查 `/memos/proxy/image/**` 与 `/memos/proxy/file/**` 是否可访问，以及 Memos 附件是否需要鉴权。压缩失败时会回退到原图路径。
 
 更多维护说明见 [ai/README.md](./ai/README.md)。
 

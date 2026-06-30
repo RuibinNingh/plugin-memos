@@ -13,6 +13,14 @@
 | `owner` | text | `admin` | 否 | `MomentFinderImpl` |
 | `title` | text | `瞬间` | 否 | `MomentRouter` |
 | `pageSize` | number | 10 | 否 | `MomentRouter` |
+| `imageCacheEnabled` | checkbox | true | 否 | `ImageCacheSettings` |
+| `imageCacheWidth` | number | 1600 | 否 | `ImageCacheSettings` |
+| `imageCacheQuality` | number | 82 | 否 | `ImageCacheSettings` |
+| `imageCacheMinBytes` | number | 307200 | 否 | `ImageCacheSettings` / `ImageUrlSupport` |
+| `imageCacheWarmupEnabled` | checkbox | true | 否 | `ImageCacheWarmupService` |
+| `imageCacheWarmupPageSize` | number | 50 | 否 | `ImageCacheWarmupService` |
+| `imageCacheWarmupMaxPages` | number | 2 | 否 | `ImageCacheWarmupService` |
+| `imageCacheMaxAgeDays` | number | 30 | 否 | `ImageCacheService` |
 
 `group: base` 是统一分组,所有读取都走 `settingFetcher.get("base")`。
 
@@ -74,7 +82,28 @@
 
 **上限**:不硬限;但 `MomentFinderImpl.walkToPage` 要走 `pageSize × page` 次 memos 请求,**设太大翻页慢**。建议 5~30。
 
-## 6. 改 settings.yaml 的注意事项
+## 6. 图片缓存设置
+
+**目的**:减少博客服务器到浏览器的图片传输体积。Memos 原图不变,原图仍可通过 `/memos/proxy/file/**` 获取。
+
+| 字段 | 建议 |
+| --- | --- |
+| `imageCacheEnabled` | 正常保持 `true`;关闭后 `/memos/proxy/image/**` 会回退原图。 |
+| `imageCacheWidth` | 1600 或 1920。 |
+| `imageCacheQuality` | 82 到 90。PNG 无透明通道会转 JPEG;有透明通道保留 PNG。 |
+| `imageCacheMinBytes` | 默认 300KB。小图直接走原图,避免无收益压缩。 |
+| `imageCacheWarmupEnabled` | 正常保持 `true`;也可以在 Console 手动刷新。 |
+| `imageCacheMaxAgeDays` | 默认 30 天,后台预热后顺带清理过期文件。 |
+
+缓存位置:
+
+```text
+<pluginsRoot>/memos/cache/images/
+```
+
+不要把缓存目录指向 Memos 数据目录。
+
+## 7. 改 settings.yaml 的注意事项
 
 - **加字段**:
   1. 在 `forms[0].formSchema` 加一个 `$formkit` 项。

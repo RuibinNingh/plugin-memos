@@ -9,16 +9,16 @@
 ```text
 <script setup lang="ts">
   // 1. 类型定义(Memo / Attachment / MemosResponse)
-  // 2. 常量(PROXY_BASE / PAGE_SIZE / VIEW_KEY)
-  // 3. 响应式状态(memos / loading / error / viewMode)
+  // 2. 常量(PROXY_BASE / PUBLIC_PROXY_BASE / CACHE_API / PAGE_SIZE / VIEW_KEY)
+  // 3. 响应式状态(memos / loading / error / viewMode / refreshingImageCache)
   // 4. 计算属性(totalCount / hasMore / latestTime / listClass)
   // 5. 工具函数(renderMarkdown / attachmentUrl / formatTime / ...)
-  // 6. 异步动作(fetchPage / refresh / loadMore)
+  // 6. 异步动作(fetchPage / refresh / loadMore / refreshImageCache)
   // 7. onMounted(refresh)
 </script>
 
 <template>
-  <!-- 头部统计 + 视图切换 + 刷新 -->
+  <!-- 头部统计 + 视图切换 + 刷新 + 刷新图片缓存 -->
   <!-- loading / error / empty 三态 -->
   <!-- 时间线 / 瀑布流列表 + 图片网格 + 视频 -->
   <!-- 加载更多 -->
@@ -56,11 +56,15 @@ interface Attachment {
 
 ```ts
 const PROXY_BASE = '/apis/api.memos.plugin.halo.run/v1alpha1/proxy'
+const PUBLIC_PROXY_BASE = '/memos/proxy'
+const CACHE_API = '/apis/console.api.memos.plugin.halo.run/v1alpha1/cache'
 const PAGE_SIZE  = 20
 const VIEW_KEY   = 'memos-view-mode'
 ```
 
 - **`PROXY_BASE`** 必须与后端 `MemosProxyEndpoint.groupVersion()` 一致。改了后端 group,这里也要改。
+- **`PUBLIC_PROXY_BASE`** 用于公开图片/原图路由:`/memos/proxy/image/**` 和 `/memos/proxy/file/**`。
+- **`CACHE_API`** 用于 Console 手动刷新图片缓存。
 - **`PAGE_SIZE = 20`** 是"加载更多"每次拉的条数;`loadMore` 时用 `nextPageToken` 续。
 - **`VIEW_KEY = 'memos-view-mode'`** 是 localStorage 的 key,持久化用户选的时间线/瀑布流视图。
 
@@ -104,15 +108,18 @@ function renderMarkdown(content: string): string {
 ```ts
 function attachmentUrl(att: Attachment): string {
   if (att.externalLink) return att.externalLink
-  const uid = att.name.startsWith('attachments/')
-    ? att.name.slice('attachments/'.length)
-    : att.name
-  return `${PROXY_BASE}/file/attachments/${uid}/${encodeURIComponent(att.filename)}`
+  return `${PUBLIC_PROXY_BASE}/file/${attachmentPath(att)}`
+}
+
+function displayAttachmentUrl(att: Attachment): string {
+  if (att.externalLink) return att.externalLink
+  if (shouldUseImageCache(att)) return `${PUBLIC_PROXY_BASE}/image/${attachmentPath(att)}`
+  return attachmentUrl(att)
 }
 ```
 
 - 优先用 `externalLink`(memos 里手工填的外链)。
-- 否则走 `PROXY_BASE + '/file/...'` —— 后端 `MemosProxyEndpoint.PUBLIC_FILE_ROUTE_PREFIX = '/memos/proxy/file'` 暴露的公开文件路由。
+- 展示图优先走 `/memos/proxy/image/...` 压缩缓存;点击链接仍走 `/memos/proxy/file/...` 原图。
 - `encodeURIComponent(att.filename)` 处理文件名里的中文/空格。
 
 **改 `PROXY_BASE` 必看 `MemosProxyEndpoint.groupVersion()`**。
@@ -173,7 +180,17 @@ pnpm add markdown-it
 
 `memo-list--timeline` / `memo-list--waterfall` 是 SCSS class。在 `<style scoped>` 改样式即可,JS 不动。
 
-## 10. 测试
+## 10. 图片缓存刷新
+
+顶部"刷新图片缓存"按钮调用:
+
+```text
+POST /apis/console.api.memos.plugin.halo.run/v1alpha1/cache/refresh
+```
+
+返回 `created/hits/failed` 后展示简短结果。这个按钮只预热压缩图,不刷新 memo 列表;普通"刷新"按钮仍调用 memos list API。
+
+## 11. 测试
 
 - `pnpm test:unit` —— 当前为空测试套件(`--passWithNoTests` 兜底)。
 - 真实联调建议用 `./gradlew haloServer` 起 Halo + memos 容器,在 Console `/memos` 直接交互。

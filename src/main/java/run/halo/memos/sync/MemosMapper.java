@@ -1,6 +1,5 @@
 package run.halo.memos.sync;
 
-import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -12,9 +11,9 @@ import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-import org.springframework.web.util.UriUtils;
 import run.halo.app.extension.Metadata;
 import run.halo.memos.Moment;
+import run.halo.memos.cache.ImageUrlSupport;
 import run.halo.memos.client.MemosClient.AttachmentDto;
 import run.halo.memos.client.MemosClient.MemoDto;
 
@@ -28,7 +27,6 @@ public class MemosMapper {
 
     public static final String ANNO_EXCERPT = "thyuu_post_excerpt";
     public static final String ANNO_PINNED = "memos.plugin.halo.run/pinned";
-    public static final String PROXY_BASE = "/memos/proxy";
     private static final int EXCERPT_MAX = 100;
 
     private static final Parser PARSER = Parser.builder().build();
@@ -58,7 +56,10 @@ public class MemosMapper {
         Moment.MomentContent content = new Moment.MomentContent();
         String raw = memo.getContent() == null ? "" : memo.getContent();
         content.setRaw(raw);
-        content.setHtml(renderMarkdown(raw));
+        // Tags are surfaced separately (spec.tags -> theme footer / filter nav),
+        // so strip the inline "#tag" tokens out of the rendered body to avoid
+        // showing each tag twice. raw is left untouched.
+        content.setHtml(renderMarkdown(stripInlineTags(raw, memo.getTags())));
         content.setMedium(toMedium(memo.getAttachments()));
         spec.setContent(content);
 
@@ -113,20 +114,7 @@ public class MemosMapper {
     }
 
     private String resolveUrl(AttachmentDto attachment) {
-        if (StringUtils.hasText(attachment.getExternalLink())) {
-            return attachment.getExternalLink();
-        }
-        String uid = attachment.getName();
-        if (uid != null && uid.startsWith("attachments/")) {
-            uid = uid.substring("attachments/".length());
-        }
-        String filename = attachment.getFilename() == null ? "" : attachment.getFilename();
-        return PROXY_BASE + "/file/attachments/" + pathSegment(uid) + "/"
-            + pathSegment(filename);
-    }
-
-    private String pathSegment(String value) {
-        return UriUtils.encodePathSegment(value == null ? "" : value, StandardCharsets.UTF_8);
+        return ImageUrlSupport.displayUrl(attachment);
     }
 
     private Set<String> toTags(List<String> tags) {
@@ -140,7 +128,69 @@ public class MemosMapper {
         if (!StringUtils.hasText(markdown)) {
             return "";
         }
-        return RENDERER.render(PARSER.parse(markdown));
+        // Memos editor inserts a single '\n' for line breaks; commonmark's
+        // default treats a single newline as a soft break (= space), so the
+        // text collapses into one long line. Upgrade every '\n' that is NOT
+        // a paragraph separator ("\n\n") into a hard break: commonmark turns
+        // a trailing "  \n" into <br>. This keeps multi-line memos readable in
+        // the theme's /moments page without pulling in commonmark-ext-gfm.
+        return RENDERER.render(PARSER.parse(toHardBreaks(markdown)));
+    }
+
+    private String toHardBreaks(String markdown) {
+        // Normalize CRLF/CR to '\n' first; then for every '\n' that is not
+        // already part of a blank line (i.e. not preceded or followed by
+        // another '\n'), append two spaces before it.
+        String s = markdown.replace("\r\n", "\n").replace('\r', '\n');
+        StringBuilder out = new StringBuilder(s.length() + 16);
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == '\n') {
+                boolean prevIsNewline = (i == 0) || s.charAt(i - 1) == '\n';
+                boolean nextIsNewline = (i + 1 < s.length()) && s.charAt(i + 1) == '\n';
+                if (!prevIsNewline && !nextIsNewline) {
+                    out.append("  \n");
+                } else {
+                    out.append('\n');
+                }
+            } else {
+                out.append(c);
+            }
+        }
+        return out.toString();
+    }
+
+    /**
+     * Remove inline {@code #tag} tokens (memos hashtags) from the markdown so the
+     * rendered body does not repeat tags that are already exposed via
+     * {@code spec.tags}. Tags are stripped as literal {@code "#" + tag} matches
+     * (longest first, so {@code #foo} does not eat into {@code #foobar}); this is
+     * safe for CJK tags where {@code \w} word boundaries do not apply. Trailing
+     * spaces and the blank lines left behind are cleaned up.
+     */
+    private String stripInlineTags(String markdown, List<String> tags) {
+        if (!StringUtils.hasText(markdown) || tags == null || tags.isEmpty()) {
+            return markdown;
+        }
+        List<String> sorted = new ArrayList<>(tags);
+        sorted.sort((a, b) -> Integer.compare(length(b), length(a)));
+        String s = markdown;
+        for (String tag : sorted) {
+            if (StringUtils.hasText(tag)) {
+                s = s.replace("#" + tag, "");
+            }
+        }
+        // Drop trailing whitespace per line, collapse 3+ blank lines, trim ends.
+        String[] lines = s.split("\n", -1);
+        StringBuilder out = new StringBuilder(s.length());
+        for (String line : lines) {
+            out.append(line.replaceAll("[ \\t]+$", "")).append('\n');
+        }
+        return out.toString().replaceAll("\n{3,}", "\n\n").strip();
+    }
+
+    private int length(String s) {
+        return s == null ? 0 : s.length();
     }
 
     private Instant parseInstant(String value) {

@@ -55,21 +55,20 @@ public class Moment extends AbstractExtension { ... }
 - `toMoment(MemoDto, baseUrl)` → 构造 `Moment`(`metadata.name = memos-{uid}` + `spec` + 注解)。
 - `toMomentName(memosName)` / `uidFromMomentName(momentName)` — 双向转换,**uid 大小写保留**。
 - `renderMarkdown` — 用 `commonmark` 0.22.0 把 `content` 渲染成 `MomentContent.html`。
-- `resolveUrl(AttachmentDto)` — 把 memos 附件 URL 重写为 `/memos/proxy/file/attachments/{uid}/{filename}`(走 `MemosProxyEndpoint` 的公开文件路由)。
+- `resolveUrl(AttachmentDto)` — 通过 `ImageUrlSupport` 选择附件 URL: 大 JPEG/PNG 图片走 `/memos/proxy/image/attachments/{uid}/{filename}` 压缩缓存;不适合压缩的附件走 `/memos/proxy/file/attachments/{uid}/{filename}` 原图。
 
 **关键常量**
 
 ```java
 public static final String ANNO_EXCERPT = "thyuu_post_excerpt";
 public static final String ANNO_PINNED  = "memos.plugin.halo.run/pinned";
-public static final String PROXY_BASE   = "/memos/proxy";
 ```
 
 **注解语义**:`ANNO_EXCERPT` 供 thyuu-xingdu 主题做摘要,`ANNO_PINNED` 标记置顶。前者是主题约定,改它要联动改主题。
 
 **怎么改**
 
-- **改 `resolveUrl` 的前缀** ⇒ 必须同步 `MemosProxyEndpoint` 的 `PUBLIC_FILE_ROUTE_PREFIX`,否则图全挂。
+- **改 `resolveUrl` 的前缀** ⇒ 必须同步 `ImageUrlSupport`、`MemosProxyEndpoint`、`MemosImageEndpoint`,否则压缩图或原图会挂。
 - **改 markdown 渲染器** ⇒ 同步更新 `build.gradle` 的 `commonmark` 依赖版本;commonmark 与 flexmark 不兼容,**别混用**。
 - **新增 moment 字段** ⇒ 在 `buildSpec` 增加 setter;前端 `MemosView` 不消费这些字段,但 Finder 端要确认 Vo 也带上。
 

@@ -12,7 +12,8 @@
 | [module-finder.md](./module-finder.md) | `MomentFinder`, `MomentFinderImpl` | 主题端 Finder(`/moments` 列表/详情/标签) |
 | [module-comment-subject.md](./module-comment-subject.md) | `MomentCommentSubject` | 接入 Halo 评论体系 |
 | [module-theme-router.md](./module-theme-router.md) | `MomentRouter` | 主题端 `/moments` 路由 |
-| [module-proxy-endpoint.md](./module-proxy-endpoint.md) | `MemosProxyEndpoint` | Console `/apis/.../proxy/**` 代理 + 公开文件代理 |
+| [module-proxy-endpoint.md](./module-proxy-endpoint.md) | `MemosProxyEndpoint` | Console `/apis/.../proxy/**` 代理 + 公开原图代理 |
+| [module-image-cache.md](./module-image-cache.md) | `ImageCacheService`, `MemosImageEndpoint`, `MemosCacheEndpoint`, `ImageCacheWarmupService` | 图片压缩缓存、公开压缩图路由、Console 手动刷新 |
 | [module-config-webclient.md](./module-config-webclient.md) | `WebClientConfig` | 专用 WebClient Bean(16MB 缓冲) |
 
 ## 谁依赖谁
@@ -27,8 +28,11 @@ MomentFinder / Impl  ──> MemosClient, MemosMapper,
                          ReactiveSettingFetcher
 MomentRouter          ──> MomentFinder, ReactiveSettingFetcher
 MemosProxyEndpoint    ──> WebClient(memosWebClient), ReactiveSettingFetcher
+MemosImageEndpoint    ──> ImageCacheService, ImageCacheSettings
+MemosCacheEndpoint    ──> ImageCacheService, ImageCacheWarmupService
+ImageCacheWarmup      ──> MemosClient, ImageCacheService, ImageCacheSettings
 MemosClient           ──> WebClient(memosWebClient)
-MemosMapper           ──> commonmark Parser/Renderer(无 Spring 状态)
+MemosMapper           ──> ImageUrlSupport, commonmark Parser/Renderer(无 Spring 状态)
 
 WebClientConfig       ──> (暴露 memosWebClient Bean)
 ```

@@ -4,9 +4,9 @@
 
 **位置**:`src/main/java/run/halo/memos/MemosPlugin.java`
 
-**职责**:Halo 2.x 插件主类。**生命周期全空** —— 不注册 SchemeManager、不挂事件、不启后台任务。
+**职责**:Halo 2.x 插件主类。**生命周期全空** —— 不注册 SchemeManager、不挂事件;后台图片缓存预热由 Spring `@Scheduled` Bean 负责。
 
-**为什么空?** 因为本插件是"无状态反向代理 + 一个 Vue 页面"。
+**为什么空?** 因为本插件不需要手写 lifecycle;代理、Finder、图片缓存预热都由 Spring Bean 管理。
 
 ```java
 public class MemosPlugin extends BasePlugin {
@@ -18,7 +18,7 @@ public class MemosPlugin extends BasePlugin {
 
 **怎么改**
 
-- **不要**往这里塞 `start() / stop()` 钩子;若需"启动时预热",改成在 `WebClientConfig` 那个 `@Bean` 方法里 lazy-init。
+- **不要**往这里塞 `start() / stop()` 钩子;图片缓存预热在 `ImageCacheWarmupService`。
 - 若需注册 Halo 扩展点(GVK/Setting 等),由 `plugin.yaml` 的 `spec.configMapName` + `extensions/` 下的 YAML 完成,不需要 Java 写代码。
 
 ## 2. `ModelConst`
@@ -53,4 +53,4 @@ public static final String TEMPLATE_ID = "_templateId";
 `settings.yaml` 中:
 
 - 顶层 `metadata.name` 必须等于 `plugin.yaml` 的 `spec.settingName`。
-- 字段名(`baseUrl` / `accessToken` / `owner` / `title` / `pageSize`)在 `MomentFinderImpl`/`MomentRouter` 等处被 `node.path("...")` 读取,**改名会静默回退到默认值**。
+- 字段名(`baseUrl` / `accessToken` / `owner` / `title` / `pageSize` / `imageCache*`)在 `MomentFinderImpl`/`MomentRouter`/`ImageCacheSettings` 等处被 `node.path("...")` 读取,**改名会静默回退到默认值**。

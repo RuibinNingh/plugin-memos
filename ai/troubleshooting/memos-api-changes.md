@@ -40,7 +40,7 @@
 | --- | --- |
 | `createTime` 从 `String` 变 `Timestamp` | 改 `MemoDto.createTime` 为 `Instant`,同步 `MemosMapper.parseInstant`。 |
 | `visibility` 改成枚举 | `MemoDto.visibility` 改用 `String`(兼容性最好);`MomentVisible` 映射。 |
-| `attachments[].name` 去掉 `attachments/` 前缀 | `MemosMapper.resolveUrl` 改用 `if (uid.startsWith("attachments/"))` 兼容两种情况。 |
+| `attachments[].name` 去掉 `attachments/` 前缀 | `ImageUrlSupport.attachmentPath` 改用 `if (uid.startsWith("attachments/"))` 兼容两种情况。 |
 | `tags` 变成 `Object` 包含 meta | 写自定义 `JsonDeserializer`,扁平化。 |
 | `pinned` 字段删除 | `MemosMapper.buildAnnotations` 不再写 `ANNO_PINNED`。 |
 | 新增 `reactions` 字段 | 不动;若要展示,加 `MemoDto.reactions` 字段 + 模板消费。 |

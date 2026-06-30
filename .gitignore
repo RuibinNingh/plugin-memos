@@ -73,3 +73,6 @@ application-local.properties
 /ui/node_modules/
 /workplace/
 /src/main/resources/console/
+
+### Playwright MCP 调试产物
+.playwright-mcp/

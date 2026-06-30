@@ -34,6 +34,8 @@ interface MemosResponse {
 }
 
 const PROXY_BASE = '/apis/api.memos.plugin.halo.run/v1alpha1/proxy'
+const PUBLIC_PROXY_BASE = '/memos/proxy'
+const CACHE_API = '/apis/console.api.memos.plugin.halo.run/v1alpha1/cache'
 const PAGE_SIZE = 20
 const VIEW_KEY = 'memos-view-mode'
 
@@ -41,7 +43,9 @@ const memos = ref<Memo[]>([])
 const nextPageToken = ref<string | undefined>(undefined)
 const loading = ref(false)
 const loadingMore = ref(false)
+const refreshingImageCache = ref(false)
 const error = ref<string>('')
+const cacheMessage = ref<string>('')
 const lastFetchedAt = ref<Date | null>(null)
 const viewMode = ref<ViewMode>(
   (localStorage.getItem(VIEW_KEY) as ViewMode) || 'timeline'
@@ -62,19 +66,41 @@ function setView(mode: ViewMode) {
 
 function renderMarkdown(content: string): string {
   if (!content) return ''
-  return marked.parse(content, { async: false }) as string
+  // breaks: true 让 memos 编辑器里的单换行变成 <br>,与后端
+  // MemosMapper.renderMarkdown(预升级为硬换行)行为保持一致。
+  return marked.parse(content, { async: false, breaks: true }) as string
 }
 
 function attachmentUrl(att: Attachment): string {
   if (att.externalLink) return att.externalLink
+  return `${PUBLIC_PROXY_BASE}/file/${attachmentPath(att)}`
+}
+
+function displayAttachmentUrl(att: Attachment): string {
+  if (att.externalLink) return att.externalLink
+  if (shouldUseImageCache(att)) {
+    return `${PUBLIC_PROXY_BASE}/image/${attachmentPath(att)}`
+  }
+  return attachmentUrl(att)
+}
+
+function attachmentPath(att: Attachment): string {
   const uid = att.name.startsWith('attachments/')
     ? att.name.slice('attachments/'.length)
     : att.name
-  return `${PROXY_BASE}/file/attachments/${uid}/${encodeURIComponent(att.filename)}`
+  return `attachments/${uid}/${encodeURIComponent(att.filename)}`
 }
 
 function isImage(att: Attachment): boolean {
   return (att.type || '').startsWith('image/')
+}
+
+function shouldUseImageCache(att: Attachment): boolean {
+  const type = (att.type || '').toLowerCase()
+  if (type !== 'image/jpeg' && type !== 'image/jpg' && type !== 'image/png') {
+    return false
+  }
+  return true
 }
 
 function isVideo(att: Attachment): boolean {
@@ -152,6 +178,19 @@ async function loadMore() {
   }
 }
 
+async function refreshImageCache() {
+  refreshingImageCache.value = true
+  cacheMessage.value = ''
+  try {
+    const { data } = await axiosInstance.post(`${CACHE_API}/refresh`)
+    cacheMessage.value = `图片缓存：新生成 ${data.created || 0}，已存在 ${data.hits || 0}，失败 ${data.failed || 0}`
+  } catch (e: unknown) {
+    cacheMessage.value = `图片缓存刷新失败：${e instanceof Error ? e.message : String(e)}`
+  } finally {
+    refreshingImageCache.value = false
+  }
+}
+
 onMounted(refresh)
 </script>
 
@@ -188,8 +227,13 @@ onMounted(refresh)
             <template #icon><RiRefreshLine /></template>
             刷新
           </VButton>
+          <VButton type="secondary" :loading="refreshingImageCache" @click="refreshImageCache">
+            <template #icon><RiRefreshLine /></template>
+            刷新图片缓存
+          </VButton>
         </VSpace>
       </div>
+      <p v-if="cacheMessage" class="cache-message">{{ cacheMessage }}</p>
     </VCard>
 
     <VLoading v-if="loading && !memos.length" />
@@ -227,7 +271,12 @@ onMounted(refresh)
               :href="attachmentUrl(img)"
               target="_blank"
             >
-              <img :src="attachmentUrl(img)" :alt="img.filename" loading="lazy" />
+              <img
+                :src="displayAttachmentUrl(img)"
+                :alt="img.filename"
+                loading="lazy"
+                decoding="async"
+              />
             </a>
           </div>
 
@@ -270,6 +319,12 @@ onMounted(refresh)
     font-size: 1.125rem;
     font-weight: 600;
   }
+}
+
+.cache-message {
+  margin: 0.75rem 0 0;
+  color: #4b5563;
+  font-size: 0.85rem;
 }
 
 .memo-list {

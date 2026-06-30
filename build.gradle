@@ -5,6 +5,7 @@ plugins {
 }
 
 group 'run.halo.memos'
+version = '1.1.2'
 
 repositories {
     maven {

@@ -9,7 +9,9 @@
 | 路径 | Bean | 用途 |
 | --- | --- | --- |
 | `GET /apis/api.memos.plugin.halo.run/v1alpha1/proxy/**` | `endpoint()`(`CustomEndpoint`) | Console 端 axios 调用,走 Halo 鉴权 |
-| `GET /memos/proxy/file/**` | `publicMemosFileProxyRouterFunction()`(`@Bean`) | 公开文件代理(主题端 `<img>` 直出) |
+| `GET /memos/proxy/file/**` | `publicMemosFileProxyRouterFunction()`(`@Bean`) | 公开原图代理(点开/下载原图,以及压缩失败回退) |
+
+压缩图不在本类处理;`GET /memos/proxy/image/**` 属于 `MemosImageEndpoint`,会优先返回本地压缩缓存,失败时回退到 `/memos/proxy/file/**`。
 
 ## 1. 核心流程
 
@@ -88,7 +90,7 @@ return spec.exchangeToMono(upstream -> {
 
 ### 3.3 加缓存
 
-**不推荐**:文档明确"不缓存"。若必须加,优先用 Caffeine + `Request-Path` 作为 key,**不要**碰 `baseUrl` 之外的 host(SSRF 防护)。
+**不推荐缓存 memo/API JSON**:文档明确 memo 数据实时。图片压缩派生缓存已经由 `ImageCacheService` 处理,不要在这个代理里再做二次缓存。
 
 ### 3.4 改 token 处理
 

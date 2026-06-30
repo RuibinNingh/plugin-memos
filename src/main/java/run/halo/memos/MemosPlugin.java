@@ -4,9 +4,8 @@ import run.halo.app.plugin.BasePlugin;
 import run.halo.app.plugin.PluginContext;
 
 /**
- * Plugin main class. Lifecycle hooks are intentionally empty: this plugin is a
- * stateless reverse proxy to a self-hosted memos instance plus a Console view,
- * so it registers no extensions and owns no background work.
+ * Plugin main class. Lifecycle hooks are intentionally empty: runtime work is
+ * handled by Spring beans (proxy endpoints, Finder, and image-cache warmup).
  */
 public class MemosPlugin extends BasePlugin {
 

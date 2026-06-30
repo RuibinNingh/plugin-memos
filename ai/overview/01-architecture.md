@@ -103,15 +103,16 @@ Plugin 入口层
 | `baseUrl` | 插件设置中的 memos 服务根地址(Docker 内常用 `http://172.17.0.1:5230`)。 |
 | `accessToken` | 可选 Bearer token。仅在 memos 实例强制鉴权时配置。 |
 | `PROXY_BASE` | 前端常量:`/apis/api.memos.plugin.halo.run/v1alpha1/proxy`。 |
-| `/memos/proxy/file/**` | 公开文件代理路由,主题端图片直接走它(免 token)。 |
+| `/memos/proxy/file/**` | 公开原图代理路由,点开/下载原图走它(免 token)。 |
+| `/memos/proxy/image/**` | 公开压缩图缓存路由,主题列表和 Console 缩略图优先走它。 |
 
 ## 5. 设计取舍(给后来人避坑)
 
 | 取舍 | 理由 |
 | --- | --- |
-| **不缓存** | 插件文档明确"实时";缓存会让置顶/标签变更延迟显示,得不偿失。 |
+| **memo 数据不缓存** | 插件文档明确 memo 数据实时;缓存会让置顶/标签变更延迟显示,得不偿失。图片附件只缓存压缩派生文件。 |
 | **不入 SchemeManager** | memos 数据是只读视图,落 Halo DB 反而带来一致性负担。 |
 | **uid 大小写保留** | memos 0.29.1 的 uid 是大小写敏感的字符串,强行 lowercase 会撞名。 |
-| **附件 URL 走公开代理** | 主题模板直出 `<img>` 必须免 token;Console 端走 `apis/.../proxy` 是为了走 Halo 鉴权链路。 |
+| **附件 URL 走公开代理** | 原图走 `/memos/proxy/file/**`,压缩图走 `/memos/proxy/image/**`;主题模板直出 `<img>` 必须免 token。 |
 | **`Moment` 仍带 GVK** | 让 Halo 评论系统能挂载;它要的只是 group/kind/name 三元组。 |
 | **WebClient 单独配 16MB 缓冲** | 单页 memos 附件多(图片+文件),默认 256KB 不够。 |

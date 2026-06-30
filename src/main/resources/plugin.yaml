@@ -16,7 +16,7 @@ spec:
   repo: https://github.com/halo-dev/plugin-memos
   issues: https://github.com/halo-dev/plugin-memos/issues
   displayName: "Memos 反向代理"
-  description: "在 Console 实时展示本地 memos 的公共动态，通过反向代理直连 memos 服务，不缓存。"
+  description: "在 Console 实时展示本地 memos 的公共动态，通过反向代理直连 memos 服务，并为大图生成本地压缩缓存。"
   license:
     - name: "GPL-3.0"
       url: "https://github.com/halo-dev/plugin-memos/blob/main/LICENSE"

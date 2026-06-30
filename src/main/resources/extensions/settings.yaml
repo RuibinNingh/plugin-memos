@@ -31,3 +31,41 @@ spec:
           name: pageSize
           label: 主题瞬间页每页条数
           value: 10
+        - $formkit: checkbox
+          name: imageCacheEnabled
+          label: 启用图片压缩缓存
+          value: true
+          help: >
+            启用后，主题和 Console 中的大图会优先走 /memos/proxy/image/** 压缩缓存；原图仍可通过 /memos/proxy/file/** 获取。
+        - $formkit: number
+          name: imageCacheWidth
+          label: 压缩图最长边
+          value: 1600
+          help: 建议 1600 或 1920。图片不会被放大。
+        - $formkit: number
+          name: imageCacheQuality
+          label: JPEG 质量
+          value: 82
+          help: 建议 82 到 90。PNG 无透明通道会转 JPEG；有透明通道则保留 PNG。
+        - $formkit: number
+          name: imageCacheMinBytes
+          label: 最小压缩文件大小
+          value: 307200
+          help: 小于该大小的图片直接使用原图，单位字节，默认 300KB。
+        - $formkit: checkbox
+          name: imageCacheWarmupEnabled
+          label: 定时预热图片缓存
+          value: true
+          help: 定时扫描最近 Memos 图片并提前生成压缩缓存。
+        - $formkit: number
+          name: imageCacheWarmupPageSize
+          label: 预热每页条数
+          value: 50
+        - $formkit: number
+          name: imageCacheWarmupMaxPages
+          label: 预热页数上限
+          value: 2
+        - $formkit: number
+          name: imageCacheMaxAgeDays
+          label: 缓存保留天数
+          value: 30
